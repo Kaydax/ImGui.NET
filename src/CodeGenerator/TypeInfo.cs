@@ -14,6 +14,7 @@ namespace CodeGenerator
             { "ImFileHandle", "IntPtr" },
             { "ImU8", "byte" },
             { "ImS8", "sbyte" },
+            { "ImS16", "short" },
             { "ImU64", "ulong" },
             { "unsigned short", "ushort" },
             { "unsigned int", "uint" },
@@ -43,6 +44,11 @@ namespace CodeGenerator
             { "ImVec2[2]", "Vector2*" },
             { "char* []", "byte**" },
             { "unsigned char[256]", "byte*"},
+            { "ImGuiContextHookCallback", "IntPtr" },
+            { "ImGuiErrorLogCallback", "IntPtr" },
+            { "ImGuiMemAllocFunc", "IntPtr" },
+            { "ImGuiMemFreeFunc", "IntPtr" },
+            { "ImFontBuilderIO*", "IntPtr" },
         };
 
         public static readonly Dictionary<string, string> WellKnownFieldReplacements = new Dictionary<string, string>()
@@ -63,10 +69,12 @@ namespace CodeGenerator
             { "((void *)0)", "null" },
             { "((void*)0)", "null" },
             { "ImVec2(0,0)", "new Vector2()" },
+            { "ImVec2(0.0f,0.0f)", "new Vector2()" },
             { "ImVec2(-1,0)", "new Vector2(-1, 0)" },
             { "ImVec2(1,0)", "new Vector2(1, 0)" },
             { "ImVec2(1,1)", "new Vector2(1, 1)" },
             { "ImVec2(0,1)", "new Vector2(0, 1)" },
+            { "ImVec2(-FLT_MIN,0)", "new Vector2(-float.MinValue, 0)" },
             { "ImVec4(0,0,0,0)", "new Vector4()" },
             { "ImVec4(1,1,1,1)", "new Vector4(1, 1, 1, 1)" },
             { "ImDrawCornerFlags_All", "ImDrawCornerFlags.All" },
