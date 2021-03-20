@@ -21,6 +21,10 @@ namespace CodeGenerator
             if (v == null) return 0;
             return v.ToObject<int>();
         }
+        private bool CheckLocationInternal (string location)
+        {
+            return location?.StartsWith ("imgui_internal") ?? false;
+        }
         public void LoadFrom(string directory)
         {
             
@@ -65,7 +69,7 @@ namespace CodeGenerator
             {
                 JProperty jp = (JProperty)jt;
                 string name = jp.Name;
-                if (typeLocations?[jp.Name]?.Value<string>() == "internal") {
+                if (CheckLocationInternal(typeLocations?[jp.Name]?.Value<string>())) {
                     return null;
                 }
                 EnumMember[] elements = jp.Values().Select(v =>
@@ -79,7 +83,7 @@ namespace CodeGenerator
             {
                 JProperty jp = (JProperty)jt;
                 string name = jp.Name;
-                if (typeLocations?[jp.Name]?.Value<string>() == "internal") {
+                if (CheckLocationInternal(typeLocations?[jp.Name]?.Value<string>())) {
                     return null;
                 }
                 TypeReference[] fields = jp.Values().Select(v =>
@@ -120,7 +124,7 @@ namespace CodeGenerator
                         }
                     }
                     if (friendlyName == null) { return null; }
-                    if (val["location"]?.ToString() == "internal") return null;
+                    if (CheckLocationInternal(val["location"]?.ToString())) return null;
 
                     string exportedName = ov_cimguiname;
                     if (exportedName == null)
@@ -162,7 +166,12 @@ namespace CodeGenerator
                     foreach (JToken dv in val["defaults"])
                     {
                         JProperty dvProp = (JProperty)dv;
-                        defaultValues.Add(dvProp.Name, dvProp.Value.ToString());
+                        string defValue = dvProp.Value.ToString();
+                        if (defValue == "NULL")
+                        {
+                            defValue = "null";
+                        }
+                        defaultValues.Add(dvProp.Name, defValue);
                     }
                     string returnType = val["ret"]?.ToString() ?? "void";
                     string comment = null;

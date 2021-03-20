@@ -17,7 +17,7 @@ New-Item -ItemType Directory -Force -Path $PSScriptRoot\deps\cimgui\win-x64 | Ou
 
 $client = New-Object System.Net.WebClient
 $client.DownloadFile(
-    "https://github.com/mellinoe/imgui.net-nativebuild/releases/download/$tag/cimgui.win-x86.dll",
+    "https://github.com/Doom2fan/imgui.net-nativebuild/releases/download/$tag/cimgui.win-x86.dll",
     "$PSScriptRoot/deps/cimgui/win-x86/cimgui.dll")
 if( -not $? )
 {
@@ -29,7 +29,7 @@ if( -not $? )
 Write-Host "- cimgui.dll (x86)"
 
 $client.DownloadFile(
-    "https://github.com/mellinoe/imgui.net-nativebuild/releases/download/$tag/cimgui.win-x64.dll",
+    "https://github.com/Doom2fan/imgui.net-nativebuild/releases/download/$tag/cimgui.win-x64.dll",
     "$PSScriptRoot/deps/cimgui/win-x64/$configuration/cimgui.dll")
 if( -not $? )
 {
@@ -41,7 +41,7 @@ if( -not $? )
 Write-Host "- cimgui.dll (x64)"
 
 $client.DownloadFile(
-    "https://github.com/mellinoe/imgui.net-nativebuild/releases/download/$tag/cimgui.so",
+    "https://github.com/Doom2fan/imgui.net-nativebuild/releases/download/$tag/cimgui.so",
     "$PSScriptRoot/deps/cimgui/linux-x64/cimgui.so")
 if( -not $? )
 {
@@ -53,7 +53,7 @@ if( -not $? )
 Write-Host - cimgui.so
 
 $client.DownloadFile(
-    "https://github.com/mellinoe/imgui.net-nativebuild/releases/download/$tag/cimgui.dylib",
+    "https://github.com/Doom2fan/imgui.net-nativebuild/releases/download/$tag/cimgui.dylib",
     "$PSScriptRoot/deps/cimgui/osx-x64/cimgui.dylib")
 if( -not $? )
 {
